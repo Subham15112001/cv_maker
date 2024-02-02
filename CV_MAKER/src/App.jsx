@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -18,26 +18,64 @@ function App() {
   const [EIedit,setEIedit] = useState(false);
   const [PEedit,setPEedit] = useState(false);
   const [Predit,setPredit] = useState(false);
+  
+  //current element to delete or edit
+  const [EIcurrent,setEIcurrent] = useState(null);
+  const [PEcurrent,setPEcurrent] = useState(null);
+  const [Prcurrent,setPrcurrent] = useState(null);
 
   //save info
   let save_input_form = (obj) => {
-    switch(obj.form){
+    switch (obj.form) {
       case "General_Information":
-        
-        setGeneral_Information({...obj});
+
+        setGeneral_Information({ ...obj });
         console.log(obj)
         setGIedit(false);
+        break;
+
+      case "Education_Exp":
+
+        if (EIedit) {
+          Education_Experience[EIcurrent] = obj;
+          setEducation_Experience(Education_Experience);
+          setEIedit(false);
+        } else {
+          setEducation_Experience((value) => {
+            value.push(obj);
+            return value;
+          })
+          
+        }
         break;
     }
   }
 
   let delete_info = (obj) => {
-    switch(obj.form){
-      case "General_Information":       
-        setGeneral_Information({});       
+    switch (obj.form) {
+      case "General_Information":
+        setGeneral_Information({});
         break;
+
+      case "Education_Exp":
+
+        let temp_array = Education_Experience.filter((value, index) => {
+          if (index !== EIcurrent) {
+            return true;
+          }
+          return false;
+        })
+
+        setEducation_Experience(temp_array);
+        setEIcurrent(null)
+        break;
+
     }
   }
+
+  useEffect(()=>{
+   console.log(Education_Experience)
+  },[Education_Experience.length])
 
   return (
     <>
@@ -58,6 +96,8 @@ function App() {
         delete_info = {delete_info}
         info = {Education_Experience}
         allow_editing = {()=> setEIedit((!EIedit))}
+        current = {EIcurrent}
+        setCurrent = {(value) => setEIcurrent(value)}
         />
       </div>
     </>

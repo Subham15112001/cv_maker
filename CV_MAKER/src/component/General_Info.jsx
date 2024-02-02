@@ -44,7 +44,6 @@ function General_Info(props) {
     let id = useId();
 
     //edit is on
-    
     useEffect(() => {
         if(props.isEditing){
         setFirstName(props.info?.firstname);
@@ -179,7 +178,7 @@ function General_Info(props) {
                                           focus:border-blue-500 block w-full p-2.5
                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="123-455-6789" 
-                               pattern="^[0-9]{10}$" 
+                               pattern="\d{10}" 
                                onChange={(e)=> setNumber((e.target.value).toString())}
                                value={number}
                                required 
