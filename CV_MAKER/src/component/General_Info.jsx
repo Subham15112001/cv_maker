@@ -60,7 +60,6 @@ function General_Info(props) {
     function store_info(){
 
         //store in object
-        console.log(firstname)
         let obj = {
             firstname:firstname,
             lastname:lastname,
@@ -70,7 +69,6 @@ function General_Info(props) {
             form:form,
             id:id
         };
-        console.log(obj)
         props.save_info(obj);//store it in General_Information
         
         //reset form

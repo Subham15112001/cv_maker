@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import General_Info from './component/General_Info.jsx';
 import Education_Exp from './component/Education_Exp.jsx';
+import Professional_Exp from './component/Professional_Exp.jsx';
 
 function App() {
 
@@ -11,18 +12,15 @@ function App() {
   const [General_Information,setGeneral_Information] = useState({});
   const [Education_Experience,setEducation_Experience] = useState([]);
   const [Pro_Experience,setPro_Experience] = useState([]);
-  const [Projects,setProjects] = useState([]);
-
+ 
   //edit and delete render
   const [GIedit,setGIedit] = useState(false);
   const [EIedit,setEIedit] = useState(false);
   const [PEedit,setPEedit] = useState(false);
-  const [Predit,setPredit] = useState(false);
   
   //current element to delete or edit
   const [EIcurrent,setEIcurrent] = useState(null);
   const [PEcurrent,setPEcurrent] = useState(null);
-  const [Prcurrent,setPrcurrent] = useState(null);
 
   //save info
   let save_input_form = (obj) => {
@@ -47,6 +45,22 @@ function App() {
           })
           
         }
+
+        break;
+
+       case  "Professional_Exp":
+        if (PEedit) {
+          Pro_Experience[PEcurrent] = obj;
+          setPro_Experience(Education_Experience);
+          setPEedit(false);
+        } else {
+          setPro_Experience((value) => {
+            value.push(obj);
+            return value;
+          })
+          
+        }
+        
         break;
     }
   }
@@ -68,8 +82,22 @@ function App() {
 
         setEducation_Experience(temp_array);
         setEIcurrent(null)
+        setEIedit(false)
         break;
 
+       case "Professional_Exp":
+
+        let temp_array_1 = Education_Experience.filter((value, index) => {
+          if (index !== PEcurrent) {
+            return true;
+          }
+          return false;
+        })
+
+        setEducation_Experience(temp_array_1);
+        setPEcurrent(null);
+        setPEedit(false);
+        break;
     }
   }
 
@@ -79,7 +107,10 @@ function App() {
 
   return (
     <>
-      <div className='w-2/4 bg-black  p-4'>
+    <div className='flex m-0 p-0'>
+      <div className='flex-1 min-h-screen m-0 p-0 w-full bg-black'>
+    {/* personal information */}
+      <div className='w-full bg-black  p-4'>
         <General_Info 
         isEditing = {GIedit}
         save_info = {save_input_form}
@@ -88,8 +119,8 @@ function App() {
         allow_editing = {()=> setGIedit((!GIedit))}
         />
       </div>
-
-      <div className='w-2/4 bg-black min-h-screen p-4 mt-0'>
+    {/* create Educational information */}
+      <div className='w-full bg-black  p-4 mt-0'>
         <Education_Exp
         isEditing = {EIedit}
         save_info = {save_input_form}
@@ -100,6 +131,25 @@ function App() {
         setCurrent = {(value) => setEIcurrent(value)}
         />
       </div>
+
+     {/*create  personal experience form */}
+     <div className='w-full bg-black  p-4 mt-0'>
+      <Professional_Exp
+        isEditing = {PEedit}
+        save_info = {save_input_form}
+        delete_info = {delete_info}
+        info = {Pro_Experience}
+        allow_editing = {()=> setPEedit((!PEedit))}
+        current = {PEcurrent}
+        setCurrent = {(value)=>setPEcurrent(value) }
+      />
+     </div>
+
+     </div>
+     <div className='flex-1 min-h-screen m-0 p-0 w-full bg-white'>
+
+     </div>
+     </div>
     </>
   )
 }
