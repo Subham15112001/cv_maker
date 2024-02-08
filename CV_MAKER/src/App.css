@@ -1,0 +1,148 @@
+
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@ CV CSS @@@@@@@@@@@@@@@@@@@@@@@@@@@@  */
+.cv-section{
+    margin: 1.5em;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.cv-basic-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: start;
+   
+}
+
+.cv-basic-info > p {
+    text-align: left;
+    height: fit-content;
+    font-size: 0.8rem;
+}
+
+.cv-basic-info > p.firstname  {
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+
+.cv-education-info, .cv-pro-info{
+    min-height: 200px;
+    height: fit-content;
+}
+
+.cv-section-title{
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    /* font-size: 0.9rem; */
+}
+
+.cv-education-info > .entry:first-of-type, .cv-pro-info > .entry:first-of-type{
+    margin-top: 12px;
+}
+
+.cv-education-info > .entry {
+    display: grid;
+    grid-template-areas: 
+    "cv-degree-school . . . . cv-dates"
+    ". . . . . cv-city-country"
+    ;
+}
+
+.cv-degree-school, .cv-dates, .cv-city-country{
+    display: flex;
+    flex-direction: row;
+    font-size: 0.9rem;
+}
+
+.cv-degree-school{
+    grid-area: cv-degree-school;
+}
+
+.entry > .cv-degree-school> .degree{
+    font-weight: 700;
+}
+
+.entry > .cv-degree-school> .school{
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.cv-dates{
+    grid-area: cv-dates;
+    justify-self: flex-end;
+}
+
+.entry > .cv-dates > .start_date, .entry > .cv-dates > .start_date{
+    margin-right: 5px;
+}
+
+.cv-city-country{
+    grid-area: cv-city-country;
+    justify-self: flex-end;
+}
+
+.entry > .cv-city-country > .city, .entry > .cv-jobTitle-company > .JobTitle{
+    margin-right: 5px;
+}
+
+.entry > .cv-degree-school> .degree::after, .entry > .cv-city-country > .city::after, .entry > .cv-jobTitle-company > .JobTitle::after{
+    content: ',';
+}
+
+.entry > .cv-dates > .startDate::after, .entry > .cv-dates > .start_date::after{
+    content: '  -';
+}
+
+.mainTasks{
+    white-space: pre-line;
+    font-size: 0.55rem;
+}
+
+.cv-education-info > .entry, .cv-pro-info > .entry {
+    margin-bottom: 18px;
+}
+
+.cv-pro-info > .entry {
+    display: grid;
+    grid-template-areas:
+    "cv-jobTitle-company cv-jobTitle-company cv-jobTitle-company . . cv-dates"
+    "mainTasks mainTasks mainTasks mainTasks mainTasks mainTasks";
+}
+
+.cv-pro-info > .entry > .cv-jobTitle-company{
+    grid-area: cv-jobTitle-company;
+    display: flex;
+    flex-direction: row;
+}
+
+.entry > .cv-jobTitle-company > .JobTitle{
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.entry > .cv-jobTitle-company > .Company{
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.cv-pro-info > .entry > .cv-dates{
+    grid-area: cv-dates;
+    font-size: 0.9rem;
+}
+
+.cv-pro-info > .entry > .cv-mainTasks{
+    grid-area: mainTasks;
+    margin-top: 5px;
+}

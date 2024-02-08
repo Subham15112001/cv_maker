@@ -5,6 +5,9 @@ import './App.css'
 import General_Info from './component/General_Info.jsx';
 import Education_Exp from './component/Education_Exp.jsx';
 import Professional_Exp from './component/Professional_Exp.jsx';
+import Download_button from './component/Download_button.jsx';
+import Render_pdf from './component/Render_pdf.jsx';
+
 
 function App() {
 
@@ -21,6 +24,9 @@ function App() {
   //current element to delete or edit
   const [EIcurrent,setEIcurrent] = useState(null);
   const [PEcurrent,setPEcurrent] = useState(null);
+ 
+  //re render
+  const [re_render,setRe_render] = useState(true);
 
   //save info
   let save_input_form = (obj) => {
@@ -40,8 +46,9 @@ function App() {
           setEIedit(false);
         } else {
           setEducation_Experience((value) => {
-            value.push(obj);
-            return value;
+            let array_temp = [...value,obj];
+           // console.log(array_temp)
+            return array_temp;
           })
           
         }
@@ -55,8 +62,9 @@ function App() {
           setPEedit(false);
         } else {
           setPro_Experience((value) => {
-            value.push(obj);
-            return value;
+            let array_temp1 = [...value,obj];
+           // console.log(array_temp)
+            return array_temp1;
           })
           
         }
@@ -102,8 +110,10 @@ function App() {
   }
 
   useEffect(()=>{
+   setRe_render(false);
+   setRe_render(true);
    console.log(Education_Experience)
-  },[Education_Experience.length])
+  },[Education_Experience.length,General_Information,Pro_Experience.length])
 
   return (
     <>
@@ -146,9 +156,14 @@ function App() {
      </div>
 
      </div>
-     <div className='flex-1 min-h-screen m-0 p-0 w-full bg-white'>
-
-     </div>
+        <div className='flex-1 min-h-screen m-0 p-0 w-11/12 bg-white'>
+          <Download_button />
+          {(<Render_pdf
+           General_Information = {General_Information}
+           Pro_Experience = {Pro_Experience}
+           Education_Experience = {Education_Experience}
+          />)}
+        </div>
      </div>
     </>
   )
