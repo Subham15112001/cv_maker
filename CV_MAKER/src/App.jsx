@@ -117,6 +117,14 @@ function App() {
 
   return (
     <>
+      <div className='  flex justify-center
+                         dark:bg-blue-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                         bg-gray-50 border border-gray-300
+                         text-black  text-lg 
+                           rounded-lg   w-full p-2.5'
+
+      ><h1>Create Your CV</h1>
+      </div>
     <div className='flex m-0 p-0'>
       <div className='flex-1 min-h-screen m-0 p-0 w-full bg-black'>
     {/* personal information */}
@@ -157,12 +165,15 @@ function App() {
 
      </div>
         <div className='flex-1 min-h-screen m-0 p-0 w-11/12 bg-white'>
+         
           <Download_button />
+          <div className='border-4 border-solid border-black m-2 rounded'>
           {(<Render_pdf
            General_Information = {General_Information}
            Pro_Experience = {Pro_Experience}
            Education_Experience = {Education_Experience}
           />)}
+          </div>
         </div>
      </div>
     </>
